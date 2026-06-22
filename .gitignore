@@ -1,0 +1,10 @@
+node_modules
+dist
+.DS_Store
+
+# dev / verification screenshots (root only) — keep public/projects/*.png
+/screenshot-*.png
+/*.jpg
+
+# large saved reference page, not part of the app
+/HOME___JIEJOE________.html

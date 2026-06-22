@@ -1,0 +1,147 @@
+.contact__panel {
+  background: rgba(247, 247, 247, 0.02);
+  border: 1px solid rgba(247, 247, 247, 0.08);
+  border-radius: var(--radius-panel);
+  padding: clamp(3rem, 6vw, 5rem) clamp(2rem, 5vw, 4rem);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 3rem;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  transition: border-color var(--transition);
+}
+
+.contact__panel:hover {
+  border-color: var(--accent-mid);
+}
+
+.contact__panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at bottom right, rgba(23, 247, 0, 0.06), transparent 65%);
+  pointer-events: none;
+}
+
+.contact__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.contact__heading {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 1.05;
+}
+
+.contact__sub {
+  font-size: 1rem;
+  color: rgba(247, 247, 247, 0.55);
+  line-height: 1.7;
+  max-width: 38ch;
+}
+
+
+/* ── contact methods (vertical stack) ── */
+.contact__methods {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.contact__method {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--font-body);
+  color: var(--text);
+  transition: color var(--transition);
+}
+
+button.contact__method {
+  cursor: pointer;
+}
+
+.contact__method:hover {
+  color: var(--accent);
+}
+
+.contact__method-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.contact__method-value {
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: inherit;
+  transition: color var(--transition);
+}
+
+.contact__method-value--copied {
+  color: var(--accent);
+}
+
+/* ── decorative grid box ── */
+.contact__decoration {
+  position: relative;
+  z-index: 1;
+}
+
+.contact__grid-box {
+  width: clamp(8rem, 14vw, 14rem);
+  height: clamp(8rem, 14vw, 14rem);
+  border: 1px solid var(--accent-mid);
+  border-radius: 2rem;
+  background-image:
+    linear-gradient(var(--accent-dim) 1px, transparent 1px),
+    linear-gradient(90deg, var(--accent-dim) 1px, transparent 1px);
+  background-size: 1.5rem 1.5rem;
+  position: relative;
+  animation: float 6s ease-in-out infinite;
+}
+
+.contact__grid-box::after {
+  content: '';
+  position: absolute;
+  inset: 25%;
+  border: 1px solid var(--accent);
+  border-radius: 1rem;
+  opacity: 0.4;
+  animation: float 6s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-10px); }
+}
+
+/* ── footer ── */
+.contact__footer {
+  margin-top: 2.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+/* ── responsive ── */
+@media (max-width: 768px) {
+  .contact__panel {
+    grid-template-columns: 1fr;
+    border-radius: var(--radius-panel);
+  }
+
+  .contact__decoration {
+    display: none;
+  }
+}

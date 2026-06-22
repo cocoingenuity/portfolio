@@ -1,0 +1,223 @@
+.projects__list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ── card ── */
+.project-card {
+  background: rgba(247, 247, 247, 0.03);
+  border: 1px solid rgba(247, 247, 247, 0.08);
+  border-radius: var(--radius-card);
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  transition: border-color var(--transition), background var(--transition),
+    transform var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top left, var(--accent-dim), transparent 60%);
+  opacity: 0;
+  transition: opacity var(--transition);
+  border-radius: inherit;
+}
+
+.project-card:hover {
+  border-color: var(--accent-mid);
+  background: rgba(23, 247, 0, 0.03);
+  transform: translateY(-4px);
+}
+
+.project-card:hover::before {
+  opacity: 1;
+}
+
+/* work cards (inside the list) lay out as text | screenshots */
+.projects__list .project-card {
+  flex-direction: row;
+  align-items: center;
+  gap: 3rem;
+  padding: 3rem;
+}
+
+.project-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  flex: 1 1 42%;
+  min-width: 0;
+}
+
+.project-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.project-card__num {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  opacity: 0.6;
+}
+
+.project-card__badge {
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 1px solid var(--accent-mid);
+  color: var(--accent);
+  padding: 0.2rem 0.55rem;
+  border-radius: 100px;
+}
+
+.project-card__title {
+  font-size: clamp(1.6rem, 3vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.project-card__desc {
+  font-size: 0.9rem;
+  color: rgba(247, 247, 247, 0.6);
+  line-height: 1.65;
+  flex: 1;
+}
+
+.project-card__stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  list-style: none;
+  margin-top: 0.5rem;
+}
+
+.project-card__tag {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--text);
+  background: rgba(247, 247, 247, 0.07);
+  border: 1px solid rgba(247, 247, 247, 0.1);
+  padding: 0.2rem 0.6rem;
+  border-radius: 100px;
+}
+
+/* ── ghost / teaser card ── */
+.project-card--ghost {
+  background: transparent;
+  border-style: dashed;
+  border-color: rgba(247, 247, 247, 0.1);
+  align-items: center;
+  justify-content: center;
+  min-height: 12rem;
+}
+
+.project-card--ghost:hover {
+  border-color: var(--accent-dim);
+  background: transparent;
+  transform: none;
+}
+
+/* ── OttaWay: row of phone screenshots ── */
+.phones-row {
+  flex: 1 1 58%;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  position: relative;
+  z-index: 1;
+}
+
+.phone-wrap {
+  flex: 1 1 0;
+  min-width: 0;
+  border: 1px solid rgba(247, 247, 247, 0.12);
+  border-radius: 1.25rem;
+  overflow: hidden;
+  background: #0d0d0d;
+  box-shadow: 0 22px 45px rgba(0, 0, 0, 0.45);
+  transition: transform var(--transition);
+}
+
+/* lift the centre phone for a staggered, layered look */
+.phone-wrap:nth-child(2) {
+  transform: translateY(-1.5rem);
+  z-index: 2;
+}
+
+.project-card:hover .phone-wrap:nth-child(1) { transform: translateY(-0.4rem); }
+.project-card:hover .phone-wrap:nth-child(2) { transform: translateY(-2rem); }
+.project-card:hover .phone-wrap:nth-child(3) { transform: translateY(-0.4rem); }
+
+.phone-img {
+  width: 100%;
+  height: auto;
+}
+
+/* ── HireTrack: browser-chrome mockup ── */
+.browser-mockup {
+  flex: 1 1 58%;
+  min-width: 0;
+  align-self: center;
+  border: 1px solid rgba(247, 247, 247, 0.12);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background: #0d0d0d;
+  box-shadow: 0 22px 45px rgba(0, 0, 0, 0.45);
+  position: relative;
+  z-index: 1;
+}
+
+.browser-mockup__bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 0.9rem;
+  background: rgba(247, 247, 247, 0.05);
+  border-bottom: 1px solid rgba(247, 247, 247, 0.08);
+}
+
+.browser-mockup__dot {
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 50%;
+  background: rgba(247, 247, 247, 0.22);
+}
+
+.browser-mockup__img {
+  width: 100%;
+  height: auto;
+}
+
+/* stack text over screenshots on narrower viewports */
+@media (max-width: 900px) {
+  .projects__list .project-card {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2.25rem;
+  }
+
+  .phones-row,
+  .browser-mockup {
+    flex: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .project-card,
+  .projects__list .project-card {
+    padding: 1.75rem;
+    border-radius: var(--radius-card);
+  }
+
+  .phone-wrap:nth-child(2) { transform: none; }
+}
