@@ -14,6 +14,8 @@
   flex-direction: column;
   gap: 1.5rem;
   max-width: 780px;
+  position: relative;
+  z-index: 1;
 }
 
 .hero__eyebrow {
@@ -42,6 +44,47 @@
   line-height: 1.55;
   max-width: 520px;
   animation: fade-up 0.7s ease 0.5s both;
+}
+
+/* ── kinetic slogan ── */
+.hero__slogan {
+  display: flex;
+  flex-direction: column;
+  line-height: 0.92;
+  margin: 0.4rem 0;
+}
+
+.hero__slogan-line {
+  font-weight: 700;
+  font-size: clamp(2.6rem, 8vw, 5.5rem);
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(1.1em);
+  animation: slogan-in 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+.hero__slogan-line--solid {
+  color: var(--accent);
+  animation-delay: 0.85s;
+}
+
+.hero__slogan-line--light {
+  color: var(--text);
+  animation-delay: 0.93s;
+}
+
+.hero__slogan-line--outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--accent);
+  animation-delay: 1.01s;
+}
+
+@keyframes slogan-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .hero__actions {
@@ -79,6 +122,53 @@
   50%       { transform: scaleY(1);   opacity: 1; }
 }
 
+/* ── floating wireframe cube ── */
+.hero__cube {
+  position: absolute;
+  right: 5rem;
+  top: 34%;
+  width: 11rem;
+  height: 11rem;
+  perspective: 900px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.85;
+  animation: cube-float 7s ease-in-out infinite;
+}
+
+.cube {
+  position: relative;
+  width: 11rem;
+  height: 11rem;
+  transform-style: preserve-3d;
+  animation: cube-spin 22s linear infinite;
+}
+
+.cube__face {
+  position: absolute;
+  width: 11rem;
+  height: 11rem;
+  border: 1px solid var(--accent-mid);
+  background: rgba(23, 247, 0, 0.02);
+}
+
+.cube__face--front  { transform: translateZ(5.5rem); }
+.cube__face--back   { transform: rotateY(180deg) translateZ(5.5rem); }
+.cube__face--right  { transform: rotateY(90deg) translateZ(5.5rem); }
+.cube__face--left   { transform: rotateY(-90deg) translateZ(5.5rem); }
+.cube__face--top    { transform: rotateX(90deg) translateZ(5.5rem); }
+.cube__face--bottom { transform: rotateX(-90deg) translateZ(5.5rem); }
+
+@keyframes cube-spin {
+  from { transform: rotateX(-22deg) rotateY(0deg); }
+  to   { transform: rotateX(-22deg) rotateY(360deg); }
+}
+
+@keyframes cube-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-14px); }
+}
+
 /* ── entrance animations ── */
 @keyframes fade-up {
   from { opacity: 0; transform: translateY(1.5rem); }
@@ -86,6 +176,12 @@
 }
 
 /* ── responsive ── */
+@media (max-width: 900px) {
+  .hero__cube {
+    display: none;
+  }
+}
+
 @media (max-width: 768px) {
   .hero__scroll-hint {
     display: none;
@@ -93,5 +189,19 @@
 
   .hero {
     padding-bottom: 3rem;
+  }
+}
+
+/* ── reduced motion: hold final, calm state ── */
+@media (prefers-reduced-motion: reduce) {
+  .hero__slogan-line {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .hero__cube,
+  .cube {
+    animation: none;
   }
 }

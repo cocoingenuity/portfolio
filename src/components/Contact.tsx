@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import type { CSSProperties } from 'react'
 import './Contact.css'
 
 const EMAIL = 'ningyi.wang.ca@gmail.com'
@@ -26,20 +27,22 @@ export default function Contact() {
 
   return (
     <section className="section contact" id="contact">
-      <p className="section-label">get in touch</p>
+      <p className="section-label" data-reveal>
+        <span className="glitch" data-text="get in touch">get in touch</span>
+      </p>
 
       <div className="contact__panel">
         <div className="contact__inner">
-          <h2 className="contact__heading">
+          <h2 className="contact__heading" data-reveal style={{ '--reveal-i': 0 } as CSSProperties}>
             Let's build<br />
             <span className="accent">something great.</span>
           </h2>
-          <p className="contact__sub">
+          <p className="contact__sub" data-reveal style={{ '--reveal-i': 1 } as CSSProperties}>
             Open to new opportunities, freelance projects, and interesting
             conversations. Drop me a line and I'll get back within 24 hours.
           </p>
 
-          <div className="contact__methods">
+          <div className="contact__methods" data-reveal style={{ '--reveal-i': 2 } as CSSProperties}>
             <button
               type="button"
               className="contact__method"

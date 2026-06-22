@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import './Skills.css'
 
 const categories = [
@@ -26,10 +27,12 @@ const categories = [
 export default function Skills() {
   return (
     <section className="section" id="about">
-      <p className="section-label">about &amp; skills</p>
+      <p className="section-label" data-reveal>
+        <span className="glitch" data-text="about & skills">about &amp; skills</span>
+      </p>
 
       <div className="about__layout">
-        <div className="about__bio">
+        <div className="about__bio" data-reveal style={{ '--reveal-i': 0 } as CSSProperties}>
           <h2 className="about__heading">
             I build things<br />
             <span className="accent">for the web.</span>
@@ -46,7 +49,7 @@ export default function Skills() {
           </p>
         </div>
 
-        <div className="skills__grid">
+        <div className="skills__grid" data-reveal style={{ '--reveal-i': 1 } as CSSProperties}>
           {categories.map(cat => (
             <div className="skills__category" key={cat.label}>
               <span className="skills__cat-label mono accent">{cat.label}</span>

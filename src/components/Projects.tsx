@@ -1,14 +1,17 @@
+import type { CSSProperties } from 'react'
 import './Projects.css'
 
 export default function Projects() {
   return (
     <section className="section" id="projects">
-      <p className="section-label">selected work</p>
+      <p className="section-label" data-reveal>
+        <span className="glitch" data-text="selected work">selected work</span>
+      </p>
 
       <div className="projects__list">
 
         {/* ── OttaWay ── */}
-        <article className="project-card">
+        <article className="project-card" data-reveal style={{ '--reveal-i': 0 } as CSSProperties}>
           <div className="project-card__body">
             <div className="project-card__header">
               <span className="mono project-card__num accent">01</span>
@@ -56,7 +59,7 @@ export default function Projects() {
         </article>
 
         {/* ── HireTrack ── */}
-        <article className="project-card">
+        <article className="project-card" data-reveal style={{ '--reveal-i': 1 } as CSSProperties}>
           <div className="project-card__body">
             <div className="project-card__header">
               <span className="mono project-card__num accent">02</span>
@@ -91,7 +94,7 @@ export default function Projects() {
 
       </div>
 
-      <div className="project-card project-card--ghost" aria-hidden="true">
+      <div className="project-card project-card--ghost" data-reveal style={{ '--reveal-i': 2 } as CSSProperties} aria-hidden="true">
         <span className="mono accent" style={{ fontSize: '0.8rem', letterSpacing: '0.1em' }}>
           more coming soon
         </span>

@@ -17,6 +17,12 @@ Building fast, clean digital experiences<br />
           that feel as good as they look.
         </p>
 
+        <div className="hero__slogan">
+          <span className="hero__slogan-line hero__slogan-line--solid">FAST.</span>
+          <span className="hero__slogan-line hero__slogan-line--light">CLEAN.</span>
+          <span className="hero__slogan-line hero__slogan-line--outline">SHARP.</span>
+        </div>
+
         <div className="hero__actions">
           <button
             className="btn btn--solid btn--lg"
@@ -35,6 +41,18 @@ Building fast, clean digital experiences<br />
         <div className="hero__scroll-hint" aria-hidden="true">
           <span className="hero__scroll-line" />
           <span className="mono" style={{ fontSize: '0.7rem', letterSpacing: '0.12em' }}>scroll</span>
+        </div>
+      </div>
+
+      {/* original floating wireframe cube, built from our grid + green motif */}
+      <div className="hero__cube" aria-hidden="true">
+        <div className="cube">
+          <span className="cube__face cube__face--front" />
+          <span className="cube__face cube__face--back" />
+          <span className="cube__face cube__face--right" />
+          <span className="cube__face cube__face--left" />
+          <span className="cube__face cube__face--top" />
+          <span className="cube__face cube__face--bottom" />
         </div>
       </div>
     </section>

@@ -29,7 +29,7 @@ export default function Nav() {
           {links.map(l => (
             <button key={l} className="nav__link" onClick={() => handleLink(l)}>
               <span className="mono nav__link-num">0{links.indexOf(l) + 1}.</span>
-              {l}
+              <span className="glitch" data-text={l}>{l}</span>
             </button>
           ))}
         </nav>

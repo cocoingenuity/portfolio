@@ -126,6 +126,65 @@ img, svg {
   background: var(--accent-mid);
 }
 
+/* ─── scroll-triggered reveals ─── */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  transition-delay: calc(var(--reveal-i, 0) * 80ms);
+  will-change: opacity, transform;
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ─── glitch / RGB-split for labels ─── */
+.glitch {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.glitch::before { color: var(--accent); }
+.glitch::after  { color: var(--text); }
+
+/* trigger on scroll-into-view (labels) and on hover */
+.section-label.is-visible .glitch::before,
+.glitch:hover::before,
+.nav__link:hover .glitch::before {
+  animation: glitch-a 0.45s steps(2, end) 1;
+}
+
+.section-label.is-visible .glitch::after,
+.glitch:hover::after,
+.nav__link:hover .glitch::after {
+  animation: glitch-b 0.45s steps(2, end) 1;
+}
+
+@keyframes glitch-a {
+  0%   { opacity: 0.85; transform: translate(-2px, -1px); clip-path: inset(0 0 62% 0); }
+  50%  { opacity: 0.85; transform: translate(2px, 1px);  clip-path: inset(45% 0 0 0); }
+  100% { opacity: 0; transform: none; }
+}
+
+@keyframes glitch-b {
+  0%   { opacity: 0.85; transform: translate(2px, 1px);  clip-path: inset(0 0 55% 0); }
+  50%  { opacity: 0.85; transform: translate(-2px, -1px); clip-path: inset(50% 0 0 0); }
+  100% { opacity: 0; transform: none; }
+}
+
 /* ─── responsive ─── */
 @media (max-width: 768px) {
   :root {
@@ -136,6 +195,27 @@ img, svg {
 
   .section {
     padding: 5rem 1.25rem;
+  }
+}
+
+/* ─── reduced motion: keep content visible, drop the motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .glitch::before,
+  .glitch::after {
+    display: none;
   }
 }
 
