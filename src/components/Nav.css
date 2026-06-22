@@ -123,9 +123,15 @@
   background: transparent;
 }
 
+/* secondary button stays an outline: no solid fill, subtle green shift on hover */
+.btn--outline::after {
+  content: none;
+}
+
 .btn--outline:hover {
-  color: var(--bg);
+  color: var(--accent);
   border-color: var(--accent);
+  background: var(--accent-dim);
 }
 
 .btn--solid {
