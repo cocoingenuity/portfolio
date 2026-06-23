@@ -99,8 +99,10 @@
 .hero__scroll-hint {
   position: absolute;
   bottom: 2.5rem;
-  left: 50%;
-  transform: translateX(-50%);
+  /* span full width and center the stack; avoids translateX, which the
+     fade-up animation (translateY) would otherwise override */
+  left: 0;
+  right: 0;
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -8,3 +8,6 @@ dist
 
 # large saved reference page, not part of the app
 /HOME___JIEJOE________.html
+
+# sensitive: never commit account recovery / backup codes
+/recovery-codes.txt

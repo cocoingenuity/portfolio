@@ -9,6 +9,7 @@ import Contact from './components/Contact'
 import Marquee from './components/Marquee'
 import CursorGlow from './components/CursorGlow'
 import CustomCursor from './components/CustomCursor'
+import GeoIntro from './components/GeoIntro'
 import { useScrollReveal } from './hooks/useScrollReveal'
 
 const MARQUEE_WORDS = [
@@ -24,6 +25,8 @@ const MARQUEE_WORDS = [
 
 export default function App() {
   const [loaded, setLoaded] = useState(false)
+  const [introDone, setIntroDone] = useState(false)
+  const [revealing, setRevealing] = useState(false)
 
   useEffect(() => {
     const lenis = new Lenis({
@@ -45,18 +48,28 @@ export default function App() {
 
   return (
     <>
+      {/* triangle overlay covers from the first paint; loader stacks above it */}
+      {!introDone && (
+        <GeoIntro
+          ready={loaded}
+          onReveal={() => setRevealing(true)}
+          onDone={() => setIntroDone(true)}
+        />
+      )}
       {!loaded && <LoadingScreen onDone={() => setLoaded(true)} />}
       <CursorGlow />
       <CustomCursor />
-      <Nav />
-      <main>
-        <Hero />
-        <Projects />
-        <Marquee words={MARQUEE_WORDS} />
-        <Skills />
-        <Marquee words={MARQUEE_WORDS} reverse />
-        <Contact />
-      </main>
+      <div className={'reveal-stage' + (revealing ? ' is-in' : '')}>
+        <Nav />
+        <main>
+          <Hero />
+          <Projects />
+          <Marquee words={MARQUEE_WORDS} />
+          <Skills />
+          <Marquee words={MARQUEE_WORDS} reverse />
+          <Contact />
+        </main>
+      </div>
     </>
   )
 }

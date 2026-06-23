@@ -126,6 +126,22 @@ img, svg {
   background: var(--accent-mid);
 }
 
+/* ─── homepage entrance: eases in as the intro overlay fades (cross-fade) ─── */
+.reveal-stage {
+  opacity: 0;
+  transform: translateY(12px);
+  /* slight 0.15s trail behind the overlay fade; calm ease-out, no bounce.
+     No will-change: transform here -- it would keep the fixed Nav trapped in a
+     containing block. The transform only resolves to a containing block during
+     the sub-second animation (at scroll-top), then clears to none. */
+  transition: opacity 0.9s ease-out 0.15s, transform 0.9s ease-out 0.15s;
+}
+
+.reveal-stage.is-in {
+  opacity: 1;
+  transform: none;
+}
+
 /* ─── scroll-triggered reveals ─── */
 [data-reveal] {
   opacity: 0;
@@ -208,7 +224,8 @@ img, svg {
     transition-duration: 0.001ms !important;
   }
 
-  [data-reveal] {
+  [data-reveal],
+  .reveal-stage {
     opacity: 1 !important;
     transform: none !important;
   }

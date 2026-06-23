@@ -38,10 +38,11 @@ Building fast, clean digital experiences<br />
           </button>
         </div>
 
-        <div className="hero__scroll-hint" aria-hidden="true">
-          <span className="hero__scroll-line" />
-          <span className="mono" style={{ fontSize: '0.7rem', letterSpacing: '0.12em' }}>scroll</span>
-        </div>
+      </div>
+
+      <div className="hero__scroll-hint" aria-hidden="true">
+        <span className="hero__scroll-line" />
+        <span className="mono" style={{ fontSize: '0.7rem', letterSpacing: '0.12em' }}>scroll</span>
       </div>
 
       {/* original floating wireframe cube, built from our grid + green motif */}

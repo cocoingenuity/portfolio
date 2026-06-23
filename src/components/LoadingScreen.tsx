@@ -40,7 +40,6 @@ export default function LoadingScreen({ onDone }: Props) {
   return (
     <div className={`loader ${phase === 'exit' ? 'loader--exit' : ''}`}>
       <div className="loader__grid" aria-hidden="true" />
-      <div className={`loader__panel ${phase !== 'typing' ? 'loader__panel--reveal' : ''}`} />
       <div className="loader__content">
         <span className="loader__mono mono">
           {label.slice(0, typed)}

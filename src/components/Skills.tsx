@@ -34,13 +34,14 @@ export default function Skills() {
       <div className="about__layout">
         <div className="about__bio" data-reveal style={{ '--reveal-i': 0 } as CSSProperties}>
           <h2 className="about__heading">
-            I build things<br />
-            <span className="accent">for the web.</span>
+            I turn ideas into<br />
+            <span className="accent">products.</span>
           </h2>
           <p className="about__text">
-            Fullstack developer with a focus on the frontend, the place where
-            design and code meet users. I care about performance, accessibility,
-            and the kind of polish that makes people notice without knowing why.
+            Full-stack developer building across web and mobile, from React and
+            React Native interfaces down to the APIs and databases behind them. I
+            care about performance, accessibility, and the kind of polish that
+            makes people notice without knowing why.
           </p>
           <p className="about__text">
             When I'm not shipping features I'm experimenting with AI tooling,
