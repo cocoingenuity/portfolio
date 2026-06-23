@@ -142,6 +142,17 @@ img, svg {
   transform: none;
 }
 
+/* the fixed header only fades -- never transformed -- so it cannot shift.
+   No transform/will-change here would create a containing block for it. */
+.nav-reveal {
+  opacity: 0;
+  transition: opacity 0.9s ease-out 0.15s;
+}
+
+.nav-reveal.is-in {
+  opacity: 1;
+}
+
 /* ─── scroll-triggered reveals ─── */
 [data-reveal] {
   opacity: 0;
@@ -225,7 +236,8 @@ img, svg {
   }
 
   [data-reveal],
-  .reveal-stage {
+  .reveal-stage,
+  .nav-reveal {
     opacity: 1 !important;
     transform: none !important;
   }

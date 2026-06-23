@@ -59,8 +59,11 @@ export default function App() {
       {!loaded && <LoadingScreen onDone={() => setLoaded(true)} />}
       <CursorGlow />
       <CustomCursor />
-      <div className={'reveal-stage' + (revealing ? ' is-in' : '')}>
+      {/* nav fades in but is never translated, so the fixed header stays put */}
+      <div className={'nav-reveal' + (revealing ? ' is-in' : '')}>
         <Nav />
+      </div>
+      <div className={'reveal-stage' + (revealing ? ' is-in' : '')}>
         <main>
           <Hero />
           <Projects />
