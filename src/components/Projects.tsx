@@ -1,7 +1,21 @@
-import type { CSSProperties } from 'react'
+import { useEffect, useRef, type CSSProperties } from 'react'
 import './Projects.css'
 
+const DEMO_W = 1280
+
 export default function Projects() {
+  const demoWrapRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const el = demoWrapRef.current
+    if (!el) return
+    const ro = new ResizeObserver(([entry]) => {
+      el.style.setProperty('--scale', String(entry.contentRect.width / DEMO_W))
+    })
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [])
+
   return (
     <section className="section" id="projects">
       <p className="section-label" data-reveal>
@@ -77,18 +91,30 @@ export default function Projects() {
             </ul>
           </div>
 
-          <div className="browser-mockup" role="img" aria-label="HireTrack web app screenshot">
+          <div className="browser-mockup">
             <div className="browser-mockup__bar" aria-hidden="true">
               <span className="browser-mockup__dot" />
               <span className="browser-mockup__dot" />
               <span className="browser-mockup__dot" />
+              <span className="browser-mockup__bar-spacer" />
+              <span className="browser-mockup__live-badge">interactive</span>
+              <a
+                href="/HireTrack-demo.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="browser-mockup__fullscreen-link"
+                aria-label="Open HireTrack demo fullscreen"
+              >↗</a>
             </div>
-            <img
-              src="/projects/hiretrack-match.png"
-              alt="HireTrack dashboard showing job match scores and application pipeline"
-              loading="lazy"
-              className="browser-mockup__img"
-            />
+            <div className="browser-mockup__scale-wrap" ref={demoWrapRef}>
+              <iframe
+                src="/HireTrack-demo.html"
+                title="HireTrack interactive demo"
+                loading="lazy"
+                className="browser-mockup__iframe"
+                tabIndex={-1}
+              />
+            </div>
           </div>
         </article>
 

@@ -198,9 +198,55 @@
   background: rgba(247, 247, 247, 0.22);
 }
 
-.browser-mockup__img {
-  width: 100%;
-  height: auto;
+.browser-mockup__bar-spacer {
+  flex: 1;
+}
+
+.browser-mockup__live-badge {
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent-mid);
+  border-radius: 100px;
+  padding: 0.15rem 0.5rem;
+  flex-shrink: 0;
+}
+
+.browser-mockup__fullscreen-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  color: rgba(247, 247, 247, 0.5);
+  text-decoration: none;
+  border: 1px solid rgba(247, 247, 247, 0.15);
+  flex-shrink: 0;
+  transition: color var(--transition), border-color var(--transition);
+}
+
+.browser-mockup__fullscreen-link:hover {
+  color: rgba(247, 247, 247, 0.85);
+  border-color: rgba(247, 247, 247, 0.3);
+}
+
+.browser-mockup__scale-wrap {
+  overflow: hidden;
+  /* height tracks the scaled iframe so no gap or clip */
+  height: calc(800px * var(--scale, 0.4));
+}
+
+.browser-mockup__iframe {
+  width: 1280px;
+  height: 800px;
+  border: none;
+  display: block;
+  pointer-events: none;
+  transform: scale(var(--scale, 0.4));
+  transform-origin: top left;
 }
 
 /* stack text over screenshots on narrower viewports */
