@@ -125,8 +125,10 @@ export default function ContactModal({ open, onClose }: ContactModalProps) {
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
           access_key: accessKey,
-          subject: `Portfolio contact${form.purpose ? ` — ${form.purpose}` : ''}`,
+          subject: `Portfolio contact from ${form.name.trim()} - ${form.purpose || 'Other'}`,
+          from_name: 'cocoingenuity.vercel.app',
           name: form.name.trim(),
+          // Web3Forms uses "email" as the reply-to address
           email: form.email.trim(),
           purpose: form.purpose || 'Not specified',
           message: form.message.trim(),
