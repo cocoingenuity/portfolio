@@ -11,3 +11,8 @@ dist
 
 # sensitive: never commit account recovery / backup codes
 /recovery-codes.txt
+
+# env files with real keys stay local / in Vercel; .env.example is committed
+.env
+.env.local
+.env.*.local

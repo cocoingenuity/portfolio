@@ -11,6 +11,8 @@ import CursorGlow from './components/CursorGlow'
 import CustomCursor from './components/CustomCursor'
 import GeoIntro from './components/GeoIntro'
 import { useScrollReveal } from './hooks/useScrollReveal'
+import { setLenis } from './lib/lenisStore'
+import { replayCharReveal } from './lib/zoomTransition'
 
 const MARQUEE_WORDS = [
   'React',
@@ -41,7 +43,11 @@ export default function App() {
     }
     requestAnimationFrame(raf)
 
-    return () => lenis.destroy()
+    setLenis(lenis)
+    return () => {
+      setLenis(null)
+      lenis.destroy()
+    }
   }, [])
 
   useScrollReveal()
@@ -52,7 +58,12 @@ export default function App() {
       {!introDone && (
         <GeoIntro
           ready={loaded}
-          onReveal={() => setRevealing(true)}
+          onReveal={() => {
+            setRevealing(true)
+            // the hero headline played behind the intro overlay; run it again
+            // now that the page is actually visible
+            replayCharReveal(document.getElementById('hero'))
+          }}
           onDone={() => setIntroDone(true)}
         />
       )}

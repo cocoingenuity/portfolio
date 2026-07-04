@@ -1,4 +1,5 @@
 import type { CSSProperties } from 'react'
+import CharReveal from './CharReveal'
 import './Skills.css'
 
 const categories = [
@@ -33,9 +34,9 @@ export default function Skills() {
 
       <div className="about__layout">
         <div className="about__bio" data-reveal style={{ '--reveal-i': 0 } as CSSProperties}>
-          <h2 className="about__heading">
-            I turn ideas into<br />
-            <span className="accent">products.</span>
+          <h2 className="about__heading" data-char-reveal>
+            <CharReveal text="I turn ideas into" /><br />
+            <CharReveal text="products." className="accent" startIndex={17} />
           </h2>
           <p className="about__text">
             Full-stack developer building across web and mobile, from React and

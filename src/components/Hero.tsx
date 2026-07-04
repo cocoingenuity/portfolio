@@ -1,3 +1,5 @@
+import CharReveal from './CharReveal'
+import { zoomNavigateTo } from '../lib/zoomTransition'
 import './Hero.css'
 
 export default function Hero() {
@@ -8,8 +10,8 @@ export default function Hero() {
           <span className="accent">▶</span> frontend &amp; fullstack developer
         </div>
 
-        <h1 className="hero__name">
-          Ningyi<span className="accent">.</span>
+        <h1 className="hero__name" data-char-reveal>
+          <CharReveal text="Ningyi" /><CharReveal text="." className="accent" startIndex={6} />
         </h1>
 
         <p className="hero__tagline">
@@ -26,13 +28,13 @@ Building fast, clean digital experiences<br />
         <div className="hero__actions">
           <button
             className="btn btn--solid btn--lg"
-            onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={() => zoomNavigateTo('projects')}
           >
             see my work
           </button>
           <button
             className="btn btn--outline btn--lg"
-            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={() => zoomNavigateTo('contact')}
           >
             get in touch
           </button>

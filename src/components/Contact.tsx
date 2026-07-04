@@ -1,29 +1,13 @@
 import { useState } from 'react'
 import type { CSSProperties } from 'react'
+import CharReveal from './CharReveal'
+import ContactModal from './ContactModal'
 import './Contact.css'
 
 const EMAIL = 'ningyi.wang.ca@gmail.com'
 
 export default function Contact() {
-  const [copied, setCopied] = useState(false)
-
-  const copyEmail = async () => {
-    try {
-      await navigator.clipboard.writeText(EMAIL)
-    } catch {
-      // fallback for contexts without the async clipboard API
-      const ta = document.createElement('textarea')
-      ta.value = EMAIL
-      ta.style.position = 'fixed'
-      ta.style.opacity = '0'
-      document.body.appendChild(ta)
-      ta.select()
-      try { document.execCommand('copy') } catch { /* ignore */ }
-      document.body.removeChild(ta)
-    }
-    setCopied(true)
-    setTimeout(() => setCopied(false), 1800)
-  }
+  const [modalOpen, setModalOpen] = useState(false)
 
   return (
     <section className="section contact" id="contact">
@@ -33,9 +17,9 @@ export default function Contact() {
 
       <div className="contact__panel">
         <div className="contact__inner">
-          <h2 className="contact__heading" data-reveal style={{ '--reveal-i': 0 } as CSSProperties}>
-            Let's build<br />
-            <span className="accent">something great.</span>
+          <h2 className="contact__heading" data-char-reveal>
+            <CharReveal text="Let's build" /><br />
+            <CharReveal text="something great." className="accent" startIndex={11} />
           </h2>
           <p className="contact__sub" data-reveal style={{ '--reveal-i': 1 } as CSSProperties}>
             Open to new opportunities, freelance projects, and interesting
@@ -45,20 +29,16 @@ export default function Contact() {
           <div className="contact__methods" data-reveal style={{ '--reveal-i': 2 } as CSSProperties}>
             <button
               type="button"
-              className="contact__method"
-              onClick={copyEmail}
-              aria-label={`Copy email address ${EMAIL} to clipboard`}
+              className="btn btn--solid btn--lg"
+              onClick={() => setModalOpen(true)}
             >
-              <span className="contact__method-label mono accent">email</span>
-              <span
-                className={
-                  'contact__method-value' +
-                  (copied ? ' contact__method-value--copied' : '')
-                }
-              >
-                {copied ? 'copied ✓' : EMAIL}
-              </span>
+              <span className="btn__label">send a message</span>
             </button>
+
+            <a href={`mailto:${EMAIL}`} className="contact__method">
+              <span className="contact__method-label mono accent">email</span>
+              <span className="contact__method-value">{EMAIL}</span>
+            </a>
 
             <a
               href="https://github.com/cocoingenuity"
@@ -82,6 +62,8 @@ export default function Contact() {
           © {new Date().getFullYear()} cocoingenuity
         </span>
       </footer>
+
+      <ContactModal open={modalOpen} onClose={() => setModalOpen(false)} />
     </section>
   )
 }

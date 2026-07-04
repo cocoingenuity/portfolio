@@ -1,0 +1,249 @@
+/* ── overlay ── */
+.cmodal__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200; /* above the fixed nav (100) */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: rgba(23, 23, 23, 0.72);
+  backdrop-filter: blur(10px);
+  animation: cmodal-fade 0.38s cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+
+@keyframes cmodal-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── panel: same zoom-blur-in as the view transition ── */
+.cmodal__panel {
+  position: relative;
+  width: min(34rem, 100%);
+  max-height: calc(100dvh - 3rem);
+  overflow-y: auto;
+  background: var(--bg);
+  border: 1px solid var(--accent-mid);
+  border-radius: var(--radius-card);
+  padding: clamp(2rem, 5vw, 3rem);
+  box-shadow:
+    0 0 0 1px rgba(23, 247, 0, 0.05),
+    0 24px 80px rgba(0, 0, 0, 0.6),
+    0 0 60px rgba(23, 247, 0, 0.07);
+  animation: view-zoom-in 480ms cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+
+.cmodal__close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  width: 2.4rem;
+  height: 2.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid rgba(247, 247, 247, 0.15);
+  color: var(--text);
+  font-size: 0.9rem;
+  transition: color var(--transition), border-color var(--transition),
+    background var(--transition);
+}
+
+.cmodal__close:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-dim);
+}
+
+/* ── heading ── */
+.cmodal__label {
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.cmodal__title {
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  margin-bottom: 1.75rem;
+}
+
+/* ── form ── */
+.cmodal__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.cmodal__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.cmodal__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.cmodal__field label {
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.cmodal__field input,
+.cmodal__field select,
+.cmodal__field textarea {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--text);
+  background: rgba(247, 247, 247, 0.03);
+  border: 1px solid rgba(247, 247, 247, 0.14);
+  border-radius: 0.75rem;
+  padding: 0.7rem 0.9rem;
+  transition: border-color var(--transition), background var(--transition);
+  outline: none;
+}
+
+.cmodal__field textarea {
+  resize: vertical;
+  min-height: 7rem;
+  line-height: 1.5;
+}
+
+.cmodal__field select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M1 1l4 4 4-4' fill='none' stroke='%2317f700' stroke-width='1.5'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 0.9rem center;
+  cursor: pointer;
+}
+
+.cmodal__field select option {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.cmodal__field input:focus,
+.cmodal__field select:focus,
+.cmodal__field textarea:focus {
+  border-color: var(--accent);
+  background: var(--accent-dim);
+}
+
+.cmodal__field input[aria-invalid='true'],
+.cmodal__field textarea[aria-invalid='true'] {
+  border-color: rgba(255, 92, 92, 0.6);
+}
+
+.cmodal__error-text {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: #ff5c5c;
+}
+
+/* honeypot — visually gone but still in the DOM for bots */
+.cmodal__botcheck {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ── submit / states ── */
+.cmodal__submit {
+  align-self: flex-start;
+  margin-top: 0.25rem;
+}
+
+.cmodal__submit:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.cmodal__spinner-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.cmodal__spinner {
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  border: 2px solid rgba(23, 23, 23, 0.3);
+  border-top-color: var(--bg);
+  animation: cmodal-spin 0.7s linear infinite;
+}
+
+@keyframes cmodal-spin {
+  to { transform: rotate(360deg); }
+}
+
+.cmodal__error {
+  font-size: 0.85rem;
+  color: #ff8a8a;
+  background: rgba(255, 92, 92, 0.08);
+  border: 1px solid rgba(255, 92, 92, 0.25);
+  border-radius: 0.75rem;
+  padding: 0.7rem 0.9rem;
+}
+
+.cmodal__success {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 0;
+}
+
+.cmodal__success-mark {
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
+.cmodal__success .cmodal__title {
+  margin-bottom: 0;
+}
+
+.cmodal__success-text {
+  color: rgba(247, 247, 247, 0.6);
+  margin-bottom: 0.5rem;
+}
+
+/* ── mobile: full-screen sheet ── */
+@media (max-width: 768px) {
+  .cmodal__overlay {
+    padding: 0;
+    align-items: stretch;
+  }
+
+  .cmodal__panel {
+    width: 100%;
+    max-height: none;
+    height: 100dvh;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    padding-top: 4rem;
+  }
+
+  .cmodal__row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── reduced motion: appear instantly ── */
+@media (prefers-reduced-motion: reduce) {
+  .cmodal__overlay,
+  .cmodal__panel {
+    animation: none !important;
+  }
+}

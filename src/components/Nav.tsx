@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { zoomNavigateTo } from '../lib/zoomTransition'
 import './Nav.css'
 
 const links = ['projects', 'about', 'contact']
@@ -15,7 +16,7 @@ export default function Nav() {
 
   const handleLink = (id: string) => {
     setOpen(false)
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+    zoomNavigateTo(id)
   }
 
   return (

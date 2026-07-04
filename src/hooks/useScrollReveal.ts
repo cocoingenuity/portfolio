@@ -1,14 +1,15 @@
 import { useEffect } from 'react'
 
 /**
- * Observes every [data-reveal] element and adds `is-visible` when it enters
- * the viewport, driving the fade + translate-up reveal defined in CSS.
+ * Observes every [data-reveal] and [data-char-reveal] element and adds
+ * `is-visible` when it enters the viewport, driving the fade + translate-up
+ * reveal and the per-character headline reveal defined in CSS.
  * Honors prefers-reduced-motion by revealing everything immediately.
  */
 export function useScrollReveal() {
   useEffect(() => {
     const els = Array.from(
-      document.querySelectorAll<HTMLElement>('[data-reveal]')
+      document.querySelectorAll<HTMLElement>('[data-reveal], [data-char-reveal]')
     )
     if (els.length === 0) return
 
