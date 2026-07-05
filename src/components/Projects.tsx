@@ -29,7 +29,6 @@ export default function Projects() {
           <div className="project-card__body">
             <div className="project-card__header">
               <span className="mono project-card__num accent">01</span>
-              <span className="project-card__badge mono">wip</span>
             </div>
             <h3 className="project-card__title">OttaWay</h3>
             <p className="project-card__desc">
