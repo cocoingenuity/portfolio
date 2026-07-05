@@ -114,6 +114,13 @@
   border-radius: 100px;
 }
 
+.project-card__arrow {
+  font-size: 0.72rem;
+  color: var(--text);
+  opacity: 0.45;
+  align-self: center;
+}
+
 /* ── ghost / teaser card ── */
 .project-card--ghost {
   background: transparent;
