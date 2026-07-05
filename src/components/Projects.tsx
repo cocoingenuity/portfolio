@@ -80,9 +80,9 @@ export default function Projects() {
             <h3 className="project-card__title">HireTrack</h3>
             <p className="project-card__desc">
               Aggregates jobs from LinkedIn plus the career sites of 60+ Ottawa
-              employers — auto-detecting each company's ATS and falling back
-              to LLM extraction for custom sites, with cross-source dedup and
-              0-100 resume match scoring. I built it for my own job search and
+              employers. It auto-detects each company's ATS and falls back to
+              LLM extraction for custom sites, with cross-source dedup and 0 to
+              100 resume match scoring. I built it for my own job search and
               use it every day.
             </p>
             <ul className="project-card__stack" aria-label="pipeline">
